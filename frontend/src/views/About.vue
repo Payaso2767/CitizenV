@@ -5,7 +5,32 @@
     <h1 class="well" style="text-align: center">Khởi tạo tài khoản</h1>
     <div class="col-lg-12 well">
       <div class="row">
-      <div v-for="data in datalist" v-bind:key="data">
+      <div>
+        <b> Chọn tỉnh</b>
+        <select v-model="selectTinh" >
+          <option v-for="(data,name) in datatinh" v-bind:value="name" v-bind:key="name">
+            {{ data.name }}
+          </option>
+        </select>
+        <span>Selected: {{ selectTinh }}</span>
+       </div>
+       <div>
+         <b> Chọn huyện</b>
+        <select v-model="selectHuyen" >
+          <option v-for="(data,name) in datahuyen" v-bind:value="name" v-bind:key="name">
+            {{ data.name }}
+          </option>
+        </select>
+        <span>Selected: {{ selectHuyen }} </span>
+      </div>
+       <div>
+         <b> Chọn xã </b>
+        <select v-model="selectXa"  >
+          <option v-for="(data,name) in dataxa" v-bind:value="name" v-bind:key="name">
+            {{ data }}
+          </option>
+        </select>
+        <span>Selected: {{ selectXa }} </span>
       </div>
         <form @submit.prevent="register">
           <div class="col-sm-12">
@@ -93,13 +118,25 @@ export default {
   },
   data () {
     return {
-      datalist: json,
+      selectTinh: '',
+      selectHuyen: '',
+      selectXa: '',
+      datatinh: json,
       counter: 0,
       user: {
         username: '',
         password: '',
         role: ''
       }
+    }
+  },
+  computed: {
+    datahuyen () {
+      return this.datatinh[this.selectTinh]
+    },
+    dataxa () {
+      console.log(this.datatinh[this.selectTinh] && this.datatinh[this.selectTinh][this.selectHuyen] ? this.datatinh[this.selectTinh][this.selectHuyen] : [])
+      return this.datatinh[this.selectTinh] && this.datatinh[this.selectTinh][this.selectHuyen] ? this.datatinh[this.selectTinh][this.selectHuyen] : []
     }
   },
   methods: {
