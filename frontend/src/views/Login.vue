@@ -41,15 +41,12 @@ export default {
       axios.post('http://localhost:8080/api/accounts/login', this.input)
         .then(response => {
           console.log(response)
+          localStorage.setItem('accessToken', response.data.token)
+          this.$router.push('/home')
         })
         .catch(error => {
           console.log(error)
         })
-      axios.get('http://localhost:81/api/auth/showcheck', {
-        headers: {
-          Authorization: 'Bearer ' + this.$cookies.get('token')
-        }
-      })
     },
     encryptPassword (password) {
       const salt = bcrypt.genSaltSync(10)

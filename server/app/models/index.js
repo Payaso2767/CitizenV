@@ -15,8 +15,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 
 account = require("./account.model")(sequelize, DataTypes)
+info = require("./population.model")(sequelize, DataTypes)
 const db = {
   account,
+  info,
 };
 
 db.Sequelize = Sequelize;

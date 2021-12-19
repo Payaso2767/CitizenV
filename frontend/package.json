@@ -17,6 +17,7 @@
     "popper.js": "^1.16.1",
     "vue": "^3.0.0",
     "vue-loader": "^15.9.8",
+    "vue-route-middleware": "^1.0.7",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
