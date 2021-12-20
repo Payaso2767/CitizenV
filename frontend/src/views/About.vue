@@ -33,7 +33,7 @@
                   <label>Quận/Huyện/Thị Xã</label>
                   <select v-model="selecthuyen" class="form-control">
                     <option value="">Chọn Quận/Huyện/Thị Xã</option>
-                    <option v-for="(value,name) in datacopy(data[(selecttinh)])" v-bind:value="name" v-bind:key="name">
+                    <option v-for="(value,name) in data[(selecttinh)]" v-bind:value="name" v-bind:key="name">
                     <p>{{ value.name }}</p>
                     </option>
                   </select>
