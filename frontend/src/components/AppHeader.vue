@@ -4,7 +4,7 @@
 <div class="navbar">
   <a href="" @click="this.$router.push('/Home');">Hiển thị dữ liệu</a>
   <a href="" @click="this.$router.push('/Profile');">Khai báo dữ liệu</a>
-  <a href="" @click="this.$router.push('/About');">Khởi tạo tài khoản</a>
+  <a href="" @click="this.$router.push('/about');">Khởi tạo tài khoản</a>
   <a href="" @click="logout()">Đăng xuất</a>
 </div>
 
@@ -14,6 +14,7 @@
 export default {
   methods: {
     logout () {
+      localStorage.removeItem('accessToken')
       this.$router.push('/')
     }
   }

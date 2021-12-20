@@ -3,7 +3,7 @@ const multer = require('multer')
 module.exports = app => {
   const accounts = require("../controllers/account.controller.js");
   const auth = require("../controllers/auth.controller.js");
-
+  
   var router = require("express").Router();
 
   let upload = multer();
