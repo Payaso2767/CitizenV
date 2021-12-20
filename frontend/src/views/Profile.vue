@@ -2,25 +2,25 @@
     <div>
     <app-header/>
     <div>
-        <b style="margin-left:40%">Khai báo dân cư</b>
+        <h1 class="well" style="text-align: center">Khai báo dân cư</h1>
         <form style="margin-top:3%">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputEmail4">FullName</label>
+              <label for="inputEmail4">Họ Và Tên</label>
               <input type="text" class="form-control" id="inputEmail4">
             </div>
             <div class="form-group col-md-6">
-              <label for="inputPassword4">ID card people</label>
+              <label for="inputPassword4">Căn Cước Công Dân</label>
               <input type="text" class="form-control" id="inputPassword4">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputEmail4">BirthDay</label>
+              <label for="inputEmail4">Ngày Sinh</label>
               <input type="date" class="form-control" id="inputEmail4">
             </div>
             <div class="form-group col-md-6">
-              <label for="inputPassword4">Gender</label>
+              <label for="inputPassword4">Giới Tính</label>
               <select class="form-control">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -33,7 +33,7 @@
               <label for="inputEmail4">Tỉnh</label>
               <select class="form-control" v-on:change="getMatinh($event)">
                 <option value="">Chọn Tỉnh/Thành Phố</option>
-                <option v-for="(value,name) in data" v-bind:value="name" v-bind:key="name">
+                <option v-for="(value,name) in provinces" v-bind:value="name" v-bind:key="name">
                 <p>{{ value.name }}</p>
                 </option>
               </select>
@@ -41,8 +41,8 @@
             <div class="form-group col-md-4">
               <label for="inputEmail4">Huyện</label>
               <select class="form-control" v-on:change="getMahuyen($event)">
-                <option  value="">Chọn Huyen/Thành Phố</option>
-                <option v-for="(value,name) in districts"  v-bind:value="name" v-bind:key="name">
+                <option value="">Chọn Quận/Huyện/Thành Phố/Thị Xã</option>
+                <option v-for="(value,name) in districts" v-bind:value="name" v-bind:key="name">
                 <p>{{ value.name }}</p>
                 </option>
               </select>
@@ -50,7 +50,7 @@
             <div class="form-group col-md-4">
               <label for="inputEmail4">Xã</label>
               <select class="form-control">
-                <option  value="">Chọn Xã/Thành Phố</option>
+                <option  value="">Chọn Xã/Phường/Thị Trấn</option>
                 <option v-for="(value,name) in communes"  v-bind:value="name" v-bind:key="name">
                 <p>{{ value }}</p>
                 </option>
@@ -97,11 +97,11 @@
               <input type="text" class="form-control" id="inputEmail4">
             </div>
             <div class="form-group col-md-4">
-              <label for="inputEmail4">occupation</label>
+              <label for="inputEmail4">Nghề Nghiệp</label>
               <input type="text" class="form-control" id="inputEmail4">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Sign in</button>
+          <button type="submit" class="btn btn-primary">Khai Báo</button>
         </form>
     </div>
     </div>
@@ -115,7 +115,7 @@ export default {
   },
   data () {
     return {
-      provices: [],
+      provinces: json,
       districts: [],
       communes: [],
       data: json,
@@ -123,8 +123,6 @@ export default {
       place_origin_district: '',
       palce_origin_commune: ''
     }
-  },
-  mounted () {
   },
   methods: {
     getMatinh (event) {

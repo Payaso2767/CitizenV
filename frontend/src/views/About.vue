@@ -22,8 +22,8 @@
                 <div class="col-sm-4 form-group">
                   <label>Tỉnh/Thành Phố</label>
                   <select v-model="selecttinh" class="form-control">
-                    <option disabled value="">Chọn Tỉnh/Thành Phố</option>
-                    <option v-for="(value,name) in data" v-bind:value="name" v-bind:key="name">
+                    <option value="">Chọn Tỉnh/Thành Phố</option>
+                    <option v-for="(value,name) of data" v-bind:value="name" v-bind:key="name" >
                     <p>{{ value.name }}</p>
                     </option>
                   </select>
@@ -32,8 +32,8 @@
                 <div class="col-sm-4 form-group">
                   <label>Quận/Huyện/Thị Xã</label>
                   <select v-model="selecthuyen" class="form-control">
-                    <option disabled value="">Chọn Quận/Huyện/Thị Xã</option>
-                    <option v-for="(value,name) in data[(selecttinh)]" v-bind:value="name" v-bind:key="name">
+                    <option value="">Chọn Quận/Huyện/Thị Xã</option>
+                    <option v-for="(value,name) in datacopy(data[(selecttinh)])" v-bind:value="name" v-bind:key="name">
                     <p>{{ value.name }}</p>
                     </option>
                   </select>
@@ -43,13 +43,13 @@
                   <label>Xã/Phường/Thị Trấn</label>
                   <div v-if="selecttinh===''">
                   <select v-model="selectxa" class="form-control">
-                    <option disabled value="">Chọn Xã/Phường/Thị Trấn</option>
+                    <option value="">Chọn Xã/Phường/Thị Trấn</option>
                   </select>
                   <span>Mã Số: {{ selectxa }}</span>
                   </div>
                   <div v-if="selecttinh!==''">
                   <select v-model="selectxa" class="form-control">
-                    <option disabled value="">Chọn Xã/Phường/Thị Trấn</option>
+                    <option value="">Chọn Xã/Phường/Thị Trấn</option>
                     <option v-for="(value, name) in data[(selecttinh)][(selecthuyen)]" v-bind:value="name" v-bind:key="name" >
                     <p>{{value}}</p>
                     </option>
@@ -58,15 +58,25 @@
                   </div>
                 </div>
             </div>
-            <div class="form-group">
-              <label>Loại tài khoản</label>
-              <input
-                type="text"
-                rows="3"
-                class="form-control"
-                v-model="AutoRole"
-                disabled
-              />
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <label>Loại tài khoản</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="AutoRole"
+                  disabled
+                />
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Ma so</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="AutoPlace"
+                  disabled
+                />
+              </div>
             </div>
             <div class="row">
               <div class="col-sm-6 form-group">
@@ -92,7 +102,7 @@
                 <p v-if="checkpass === 'false'" style="color: red">Mật khẩu không khớp</p>
               </div>
             </div>
-            <p v-if="response !==''">{{response.data.message}}</p>
+            <!-- <p v-if="response !==''">{{response.data.message}}</p> -->
             <button type="submit" class="btn btn-lg btn-info">Submit</button>
           </div>
         </form>
@@ -117,6 +127,7 @@ export default {
       selecthuyen: '',
       selectxa: '',
       data: json,
+      place: '',
       role: 'admin',
       password: '',
       re_password: '',
@@ -125,7 +136,10 @@ export default {
       user: {
         username: '',
         password: '',
-        role: ''
+        role: '',
+        province: '',
+        district: '',
+        commune: ''
       }
     }
   },
@@ -136,11 +150,19 @@ export default {
       } else {
         this.checkpass = 'true'
         this.user.role = this.AutoRole
+        if (this.selecttinh !== '') { this.user.province = this.selecttinh }
+        if (this.selecthuyen !== '') { this.user.district = this.selecthuyen }
+        if (this.selectxa !== '') { this.user.commune = this.selectxa }
         this.user.password = this.encryptPassword(this.user.password)
         console.log(this.user)
         axios.post('http://localhost:8080/api/accounts', this.user)
           .then(response => {
             this.response = response
+            // setTimeout(() => this.$toast.success(response), 60000)
+            this.$toast.success(response.data.message)
+            this.selecttinh = ''
+            this.selecthuyen = ''
+            this.selectxa = ''
           })
           .catch(error => {
             console.log(error)
@@ -151,9 +173,10 @@ export default {
       const salt = bcrypt.genSaltSync(10)
       return bcrypt.hashSync(password, salt)
     },
-    datacopy (data) {
-      delete data.name
-      return data
+    datacopy (obj) {
+      var datacopy = obj
+      delete datacopy.name
+      return datacopy
     }
   },
   mounted () {
@@ -162,15 +185,26 @@ export default {
   computed: {
     AutoRole () {
       if (this.selectxa !== '') {
-        return this.selecttinh + '.' + this.selecthuyen + '.' + this.selectxa
+        return 'commune'
+      } else if (this.selecthuyen !== '') {
+        return 'district'
+      } else if (this.selecttinh !== '') {
+        return 'province'
+      } else {
+        return this.role
+      }
+    },
+    AutoPlace () {
+      if (this.selectxa !== '') {
+        return this.selectxa
       }
       if (this.selecthuyen !== '') {
-        return this.selecttinh + '.' + this.selecthuyen
+        return this.selecthuyen
       }
       if (this.selecttinh !== '') {
         return this.selecttinh
       } else {
-        return this.role
+        return this.place
       }
     }
   }
