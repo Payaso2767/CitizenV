@@ -10,6 +10,18 @@ module.exports = (sequelize, Sequelize) => {
         role: {
             type: Sequelize.STRING(10)
         },
+        province: {
+            type: Sequelize.STRING(2),
+            defaultValue: null
+        },
+        district: {
+            type: Sequelize.STRING(3),
+            defaultValue: null
+        },
+        commune: {
+            type: Sequelize.STRING(5),
+            defaultValue: null
+        },
         locked: {
             type: Sequelize.BOOLEAN,
             defaultValue: false

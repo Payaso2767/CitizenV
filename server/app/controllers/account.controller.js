@@ -26,6 +26,9 @@ exports.create = async (req, res) => {
 				username: accountData.username,
 				password: accountData.password,
 				role: accountData.role,
+                province: accountData.province,
+                district: accountData.district,
+                commune: accountData.commune,
 				locked: false,
 			};
 			await Account.create(account)
