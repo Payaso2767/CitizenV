@@ -3,8 +3,7 @@ import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import About from '../views/About.vue'
 import LoginComponent from '../views/Login.vue'
-// import auth from '../middleWare/auth'
-
+import Test from '../views/Test.vue'
 const routes = [
   {
     path: '/home',
@@ -32,6 +31,11 @@ const routes = [
       }
       return next()
     }
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   }
 ]
 

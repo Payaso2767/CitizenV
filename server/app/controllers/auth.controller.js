@@ -28,7 +28,8 @@ exports.signIn = async (req, res) => {
                     res.status(202).send({
                         username: account.username,
                         accountType: account.accountType,
-                        token
+                        token,
+                        account: account
                     })
             } else {
                 res.status(401).send({ message: 'Invalid username or password2' })
