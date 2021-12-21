@@ -17,6 +17,7 @@
     "core-js": "^3.6.5",
     "crypt": "^0.0.2",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
     "popper.js": "^1.16.1",
     "stylus": "^0.56.0",
     "stylus-loader": "^3.0.2",

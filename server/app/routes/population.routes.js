@@ -19,5 +19,7 @@ module.exports = app => {
     //Update/Edit an account by username
     router.put("/:id", info.edit);
 
+    // get info by commune
+    router.get('/commune/:commune', info.getInfofollowCommune)
     app.use('/api/info', router);
 }

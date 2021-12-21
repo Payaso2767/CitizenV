@@ -154,3 +154,17 @@ exports.edit = (req, res) => {
         });
     });
 };
+
+exports.getInfofollowCommune = (req, res) => {
+	const commune = req.params.commune;
+
+	Info.findAll({ where: { perm_residence_commune: commune } })
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "No info with ID " + searchType + " found!"
+        });
+    });
+};
