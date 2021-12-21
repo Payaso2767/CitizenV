@@ -1,6 +1,6 @@
 <template>
     <body>
-    <img alt="Vue logo" src="../assets/header5.jpg">
+    <img alt="Vue logo" src="../../../assets/header5.jpg">
 <div class="navbar">
   <a href="" @click="this.$router.push('/Home');">Hiển thị dữ liệu</a>
   <a href="" @click="this.$router.push('/Profile');">Khai báo dữ liệu</a>
@@ -15,7 +15,6 @@ export default {
   methods: {
     logout () {
       localStorage.removeItem('accessToken')
-      localStorage.removeItem('username')
       this.$router.push('/')
     }
   }

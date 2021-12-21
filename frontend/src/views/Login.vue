@@ -31,18 +31,28 @@ export default {
       input: {
         username: '',
         password: ''
-      }
+      },
+      result: {}
     }
   },
   methods: {
     login () {
       this.input.password = this.encryptPassword(this.password1)
-      console.log(this.input)
       axios.post('http://localhost:8080/api/accounts/login', this.input)
         .then(response => {
-          console.log(response)
+          console.log(response.data.account)
           localStorage.setItem('accessToken', response.data.token)
-          this.$router.push('/home')
+          localStorage.setItem('username', response.data.account.username)
+          this.result = response.data.account
+          if (this.result.role === 'admin') {
+            this.$router.push('/home')
+          } else if (this.result.role === 'province') {
+            this.$router.push('/role/province/' + this.result.province)
+          } else if (this.result.role === 'district') {
+            this.$router.push('/role/district/' + this.result.district)
+          } else if (this.result.role === 'commune') {
+            this.$router.push('/role/commnue/' + this.result.commune)
+          }
         })
         .catch(error => {
           console.log(error)
