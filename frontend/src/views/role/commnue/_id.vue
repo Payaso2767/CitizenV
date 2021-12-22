@@ -1,52 +1,47 @@
 <template>
-    <body>
-    <img alt="Vue logo" src="../../../assets/header5.jpg">
-    <!-- <div class="navbar">
-      <a href="" @click="this.$router.push('/Home');">Hiển thị dữ liệu</a>
-      <a href="" @click="this.$router.push('/Profile');">Khai báo dữ liệu</a>
-      <a href="" @click="logout()">Đăng xuất</a>
-    </div> -->
-    <div>
-      <b-card no-body>
-        <b-tabs card>
-          <b-tab title="Khai bao dan cu" active>
-            <create-info :account="account"/>
-          </b-tab>
-          <b-tab title="Hien thi du lieu">
-            <table class="table-listrequest" style="width:100%; border:1px soild black">
-              <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Ho ten</td>
-                    <td>Ngay sinh</td>
-                    <td>Gioi tinh</td>
-                    <td>Dia chi thuong tru</td>
-                    <td>Ton giao</td>
-                    <td>Hoc van</td>
-                    <td>Nghe nghiep</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="list in infos" :value="list.id" v-bind:key="list.id" >
-                  <td>{{list.ID}}</td>
-                  <td>{{list.full_name}}</td>
-                  <td>{{dateTime(list.birth)}}</td>
-                  <td>{{list.gender}}</td>
-                  <td>{{sortdata(list.perm_residence_province, list.perm_residence_district, list.perm_residence_commune)}}</td>
-                  <td>{{list.religion}}</td>
-                  <td>{{list.edu_level}}</td>
-                  <td>{{list.occupation}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </b-tab>
-          <b-tab title="Dang xuat" @click="logout()">
-          </b-tab>
-        </b-tabs>
-      </b-card>
-    </div>
+  <body>
+  <img alt="Vue logo" src="../../../assets/header5.jpg">
+  <div>
+    <b-card no-body>
+      <b-tabs card>
+        <b-tab title="Khai bao dan cu" active>
+          <create-info :account="account"/>
+        </b-tab>
+        <b-tab title="Hien thi du lieu">
+          <table class="table-listrequest" style="width:100%; border:1px soild black">
+            <thead>
+              <tr>
+                  <td>ID</td>
+                  <td>Ho ten</td>
+                  <td>Ngay sinh</td>
+                  <td>Gioi tinh</td>
+                  <td>Dia chi thuong tru</td>
+                  <td>Ton giao</td>
+                  <td>Hoc van</td>
+                  <td>Nghe nghiep</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="list in infos" :value="list.id" v-bind:key="list.id" >
+                <td>{{list.ID}}</td>
+                <td>{{list.full_name}}</td>
+                <td>{{dateTime(list.birth)}}</td>
+                <td>{{list.gender}}</td>
+                <td>{{sortdata(list.perm_residence_province, list.perm_residence_district, list.perm_residence_commune)}}</td>
+                <td>{{list.religion}}</td>
+                <td>{{list.edu_level}}</td>
+                <td>{{list.occupation}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </b-tab>
+        <b-tab title="Dang xuat" @click="logout()">
+        </b-tab>
+      </b-tabs>
+    </b-card>
+  </div>
 
-</body>
+  </body>
 </template>
 <script>
 import CreateInfo from '../../../components/CreateInfo.vue'

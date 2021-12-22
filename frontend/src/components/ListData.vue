@@ -1,14 +1,14 @@
 <template>
   <div>
-    <b-table striped hover :items="values"></b-table>
+    <b-table striped hover :infos="infos"></b-table>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    values: Array,
-  },
+    infos: Array
+  }
 }
 </script>
 
