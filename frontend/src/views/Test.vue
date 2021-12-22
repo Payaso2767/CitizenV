@@ -1,24 +1,52 @@
 <template>
- <div>
-    <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
-    <b-sidebar id="sidebar-1" title="Sidebar" shadow>
-      <div class="px-3 py-2">
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-        </p>
-        <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-      </div>
-    </b-sidebar>
+  <div style="height:600px;width: 600px;">
+    <vue3-chart-js
+        :id="doughnutChart.id"
+        :type="doughnutChart.type"
+        :data="doughnutChart.data"
+        @before-render="beforeRenderLogic"
+    ></vue3-chart-js>
   </div>
 </template>
 
 <script>
-export default {
+import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
 
+export default {
+  name: 'App',
+  components: {
+    Vue3ChartJs
+  },
+  setup () {
+    const doughnutChart = {
+      id: 'doughnut',
+      type: 'bar',
+      data: {
+        labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+        datasets: [
+          {
+            backgroundColor: [
+              '#41B883',
+              '#E46651',
+              '#00D8FF',
+              '#DD1B16'
+            ],
+            data: [40, 20, 80, 10]
+          }
+        ]
+      }
+    }
+
+    const beforeRenderLogic = (event) => {
+      // if (a === b) {
+      //   event.preventDefault()
+      // }
+    }
+
+    return {
+      doughnutChart,
+      beforeRenderLogic
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

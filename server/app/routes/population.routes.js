@@ -21,5 +21,6 @@ module.exports = app => {
 
     // get info by commune
     router.get('/commune/:commune', info.getInfofollowCommune)
+    router.get('/district/:district', info.getInfofollowDistrict)
     app.use('/api/info', router);
 }

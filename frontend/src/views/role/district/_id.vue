@@ -32,9 +32,7 @@ export default {
       account: {},
       commnues: [],
       infos: [],
-      message: '',
-      test: 'BAC',
-      user: 'Lim Socheat'
+      message: ''
     }
   },
   mounted () {
@@ -110,8 +108,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-
-      // this.message = '<table><thread><tr><td>ID</td><td>Ho ten</td><td>Ngay sinh</td><td>Gioi tinh</td><td>Dia chi thuong tru</td><td>Ton giao</td><td>Hoc van</td><td>Nghe nghiep</td></tr></thread><tbody><tr v-for="' + list + 'in' + this.infos + '" :value="list.id" v-bind:key="list.id"></tr></tbody></table>'
     }
   }
 }

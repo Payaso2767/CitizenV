@@ -168,3 +168,17 @@ exports.getInfofollowCommune = (req, res) => {
         });
     });
 };
+
+exports.getInfofollowDistrict = (req, res) => {
+	const district = req.params.district;
+
+	Info.findAll({ where: { perm_residence_district: district } })
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "No info with ID " + searchType + " found!"
+        });
+    });
+};

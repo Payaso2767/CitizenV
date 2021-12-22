@@ -20,8 +20,8 @@
             <div class="form-group col-md-6">
               <label for="inputPassword4">Giới Tính</label>
               <select v-model="user.gender" class="form-control">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Nam">Nam</option>
+                <option value="Nu">Nu</option>
               </select>
             </div>
           </div>
