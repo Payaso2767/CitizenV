@@ -59,6 +59,7 @@
 </template>
 <script>
 import CreateInfo from '../../../components/CreateInfo.vue'
+// import Error from '../../../components/Error.vue'
 import moment from 'moment'
 import json from '../../vietnam.json'
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
@@ -67,6 +68,7 @@ export default {
   components: {
     CreateInfo,
     Vue3ChartJs
+    // Error
   },
   setup () {
     const doughnutChart = {

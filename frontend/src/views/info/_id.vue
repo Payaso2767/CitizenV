@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="well" style="text-align: center">Khai báo dân cư</h1>
+    <h1 class="well" style="text-align: center">Chỉnh sửa dân cư</h1>
     <form style="margin-top:3%" @submit.prevent="edit">
       <div class="form-row">
         <div class="form-group col-md-6">

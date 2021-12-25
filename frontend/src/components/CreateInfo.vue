@@ -20,7 +20,7 @@
             <div class="form-group col-md-6">
               <label for="inputPassword4">Giới Tính</label>
               <select v-model="user.gender" class="form-control">
-                <option value="Nam">Nam</option>
+                <option selected value="Nam">Nam</option>
                 <option value="Nu">Nu</option>
               </select>
             </div>
@@ -189,7 +189,6 @@ export default {
       this.temp_residence_communes = this.temp_residence_districts[event.target.value]
     },
     declare () {
-      console.log(this.user)
       axios.post('http://localhost:8080/api/info', this.user)
         .then(response => {
           console.log(response.data.message)
@@ -200,6 +199,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          this.$toast.danger(error.data.message)
         })
     }
   }
