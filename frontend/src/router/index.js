@@ -8,6 +8,7 @@ import Test from '../views/Test.vue'
 import Roleprovince from '../views/role/province/_id.vue'
 import Roledistrict from '../views/role/district/_id.vue'
 import Rolecommnue from '../views/role/commnue/_id.vue'
+import EditInfo from '../views/info/_id.vue'
 const routes = [
   {
     path: '/home',
@@ -33,6 +34,11 @@ const routes = [
     path: '/role/district/:id',
     name: 'role-district-id',
     component: Roledistrict
+  },
+  {
+    path: '/info/edit/:id',
+    name: 'info-edit-id',
+    component: EditInfo
   },
   {
     path: '/test',

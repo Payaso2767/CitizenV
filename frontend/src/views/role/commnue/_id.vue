@@ -19,6 +19,7 @@
                   <td>Ton giao</td>
                   <td>Hoc van</td>
                   <td>Nghe nghiep</td>
+                  <td>Action</td>
               </tr>
             </thead>
             <tbody>
@@ -31,9 +32,22 @@
                 <td>{{list.religion}}</td>
                 <td>{{list.edu_level}}</td>
                 <td>{{list.occupation}}</td>
+                <td>
+                  <button @click="editinfor(list)" type="button" class="btn btn-primary" data-bs-toggle="modal">
+                    Chinh sua
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
+        </b-tab>
+        <b-tab title="Thong ke">
+          <vue3-chart-js
+              :id="doughnutChart.id"
+              :type="doughnutChart.type"
+              :data="doughnutChart.data"
+              @before-render="beforeRenderLogic"
+          ></vue3-chart-js>
         </b-tab>
         <b-tab title="Dang xuat" @click="logout()">
         </b-tab>
@@ -47,10 +61,43 @@
 import CreateInfo from '../../../components/CreateInfo.vue'
 import moment from 'moment'
 import json from '../../vietnam.json'
+import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
 const axios = require('axios')
 export default {
   components: {
-    CreateInfo
+    CreateInfo,
+    Vue3ChartJs
+  },
+  setup () {
+    const doughnutChart = {
+      id: 'doughnut',
+      type: 'bar',
+      data: {
+        labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+        datasets: [
+          {
+            backgroundColor: [
+              '#41B883',
+              '#E46651',
+              '#00D8FF',
+              '#DD1B16'
+            ],
+            data: [40, 20, 80, 10]
+          }
+        ]
+      }
+    }
+
+    const beforeRenderLogic = (event) => {
+      // if (a === b) {
+      //   event.preventDefault()
+      // }
+    }
+
+    return {
+      doughnutChart,
+      beforeRenderLogic
+    }
   },
   data () {
     return {
@@ -61,17 +108,16 @@ export default {
     }
   },
   mounted () {
-    console.log(this.data['01'].name)
-    axios.get('http://localhost:8080/api/accounts/username/' + localStorage.getItem('username'))
+    axios.get('http://localhost:8080/api/info/commune/' + this.$route.params.id)
       .then(response => {
-        this.account = response.data
-        axios.get('http://localhost:8080/api/info/commune/' + this.account.commune)
-          .then(response => {
-            this.infos = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+        this.infos = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    axios.get('http://localhost:8080/api/info/gendercommune/' + this.$route.params.id)
+      .then(response => {
+        console.log(response.data.length)
       })
       .catch(error => {
         console.log(error)
@@ -92,6 +138,9 @@ export default {
       const xa = huyen[maxa]
       const s = xa + ', ' + huyen.name + ', ' + tinh.name
       return s
+    },
+    editinfor (list) {
+      this.$router.push('/info/edit/' + list.ID)
     }
   }
 }

@@ -11,7 +11,7 @@ module.exports = app => {
 
     router.get("/id/:id", info.findByID);
 
-    router.get("/type/:type", info.findAll)
+    router.get("/name/:full_name", info.findByName)
 
     //Delete an account by username
     router.delete("/:id", info.delete);

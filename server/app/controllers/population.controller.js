@@ -5,8 +5,7 @@ const sequelize = db.sequelize
 exports.create = async (req, res) => {
 	const infoData = req.body
 	if (!infoData.ID || !infoData.full_name || !infoData.birth || !infoData.gender || !infoData.place_origin_province || !infoData.place_origin_district || !infoData.palce_origin_commune
-        || !infoData.perm_residence_province || !infoData.perm_residence_district || !infoData.perm_residence_commune || !infoData.temp_residence_province || !infoData.temp_residence_district || !infoData.temp_residence_commune
-        || !infoData.religion || !infoData.edu_level || !infoData.occupation) {
+        || !infoData.perm_residence_province || !infoData.perm_residence_district || !infoData.perm_residence_commune || !infoData.religion || !infoData.edu_level || !infoData.occupation) {
 		res.status(400).send({
 			message: "Content can not be empty!"
 		});
@@ -43,10 +42,10 @@ exports.create = async (req, res) => {
 			};
 			await Info.create(info)
 
-			res.status(201).send({ message: 'Signup successfully' })
+			res.status(201).send({ message: 'Khai báo thành công' })
 		} catch (err) {
 			res.status(500).send({
-				error: err.message || "Some error occurred while creating the info."
+				error: err.message || "Đã xảy ra lỗi. Vui lòng kiểm tra lại dữ liệu."
 			});
 		}
 	}
@@ -80,9 +79,9 @@ exports.findAll = (req, res) => {
 };
 
 exports.findByID = (req, res) => {
-	const searchType = req.params.type;
+	const searchType = req.params.id;
 
-	Info.findAll({ where: { ID: searchType } })
+	Info.findOne({ where: { ID: searchType } })
     .then(data => {
         res.send(data);
     })
@@ -94,7 +93,7 @@ exports.findByID = (req, res) => {
 };
 
 exports.findByName = (req, res) => {
-	const searchType = req.params.type;
+	const searchType = req.params.full_name;
 
 	Info.findAll({ where: { full_name: searchType } })
     .then(data => {
@@ -120,7 +119,7 @@ exports.delete = (req, res) => {
             });
         } else {
             res.send({
-                message: `Cannot delete account with id=${id}. Maybe account was not found!`
+                message: "Cannot delete account with id=${id}. Maybe account was not found!"
             });
         }
     })
@@ -132,9 +131,9 @@ exports.delete = (req, res) => {
 };
 
 exports.edit = (req, res) => {
-	const ID = req.params.ID;
-
-	Account.update(req.body, {
+	const ID = req.params.id;
+    console.log(ID)
+	Info.update(req.body, {
 		where: { ID }
 	})
     .then(num => {
@@ -144,7 +143,7 @@ exports.edit = (req, res) => {
             });
         } else {
             res.send({
-                message: `Cannot update ID=${ID}. Maybe info was not found or req.body is empty!`
+                message: "Cannot update ID=${ID}. Maybe info was not found or req.body is empty!"
             });
         }
     })
